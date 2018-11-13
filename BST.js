@@ -17,16 +17,14 @@ class BinarySearchTree {
       if (this.left === null) {
         this.left = new BinarySearchTree(key, value, this);
       } else {
-        this.left.isert(key, value);
+        this.left.insert(key, value);
       }
     }
     else {
-      if (key > this.right) {
-        if (this.right === null) {
-          this.right = new BinarySearchTree(key, value, this);
-        } else {
-          this.right.insert(key, value);
-        }
+      if (this.right === null) {
+        this.right = new BinarySearchTree(key, value, this);
+      } else {
+        this.right.insert(key, value);
       }
     }
     //if value is less than the root
@@ -114,11 +112,11 @@ class BinarySearchTree {
     if (key === this.key) {
       return this.value;
     }
-    else if (key > this.key) {
-      return this.right.find(key);
-    }
-    else if (key < this.key) {
+    else if (key < this.key && this.left) {
       return this.left.find(key);
+    }
+    else if (key > this.key && this.right) {
+      return this.right.find(key);
     }
     else {
       throw new Error('key not found');
